@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安得仕有限公司設立登記流程介紹</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom font for Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+        /* Custom styles for accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            overflow: hidden;
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .accordion-content.active {
+            max-height: 1000px; /* A large enough value to accommodate content */
+            padding-top: 1rem; /* Restore padding when active */
+            padding-bottom: 1rem; /* Restore padding when active */
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-arrow.rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4 sm:p-6 lg:p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-blue-700 to-blue-900 p-6 sm:p-8 text-white text-center rounded-t-xl">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-2">安得仕有限公司設立登記流程介紹</h1>
+            <p class="text-lg sm:text-xl font-light">新客戶專屬指南</p>
+        </div>
+
+        <div class="p-6 sm:p-8 lg:p-10 space-y-6">
+            <!-- Step 0: 名稱預查 -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step0-content', 'step0-arrow')">
+                    <p class="text-lg font-semibold text-blue-800 flex items-center">
+                        <i class="fas fa-search text-blue-600 mr-3 text-xl"></i> 0. 名稱預查： (事務所協助)
+                    </p>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step0-arrow"></i>
+                </div>
+                <div id="step0-content" class="accordion-content">
+                    <p class="text-gray-700 mb-2">選定新公司名稱及營業項目，約2-3 個工作天可取得預查通知單。</p>
+                    <p class="text-gray-700 font-medium mb-1">請提供負責人：</p>
+                    <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
+                        <li>身分證影本(掃描檔)</li>
+                        <li>登記連絡電話/手機</li>
+                    </ul>
+                    <p class="text-gray-700 mt-2">*若為法人投資之子公司請告訴我們。</p>
+                    <p class="text-gray-700 mt-2">公司名稱可透過經濟部商業司輔助系統做初步確認，建議先選取2~3個名稱，依優先順序排列。查詢網址：<a href="https://www.gcis.nat.gov.tw/mainNew/" target="_blank" class="text-blue-600 hover:underline">經濟部商業司輔助系統</a></p>
+                    <p class="text-gray-700 mt-2">選取公司營業項目。 可提供給我們類似的公司，或描述公司預計要營業項目。</p>
+                </div>
+            </div>
+
+            <!-- Step 1: 提供事務所洗錢防制法規定之資訊 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step1-content', 'step1-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-users text-blue-600 mr-3 text-xl"></i> 1. 提供事務所洗錢防制法規定之資訊 (公司提供)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step1-arrow"></i>
+                </div>
+                <div id="step1-content" class="accordion-content">
+                    <ul class="list-disc list-inside ml-4 text-gray-700 space-y-2">
+                        <li>請提供出資股東之名冊、身分證影本(掃描檔)及預計出資額。</li>
+                        <li>請提供董事即股東身分證影本(掃描檔)</li>
+                        <li>請各股東提供KYC資訊：
+                            <ul class="list-circle list-inside ml-4 text-gray-600 space-y-1">
+                                <li><a href="#" class="text-blue-600 hover:underline" onclick="openKycModal(event)">自然人股東KYC表單</a></li>
+                                <li><a href="#" class="text-blue-600 hover:underline" onclick="openKycModal(event)">法人股東KYC表單</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 2: 開設公司籌備戶 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step2-content', 'step2-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-university text-blue-600 mr-3 text-xl"></i> 2. 開設公司籌備戶 (負責人)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step2-arrow"></i>
+                </div>
+                <div id="step2-content" class="accordion-content">
+                    <p class="text-gray-700 mb-3">負責人至常用銀行開設籌備戶，需攜帶：</p>
+                    <ul class="list-disc list-inside ml-4 text-gray-700 space-y-2">
+                        <li>公司名稱預查通知單</li>
+                        <li>大小章 (大章：公司名稱、小章：負責人姓名)</li>
+                        <li>個人雙證件</li>
+                    </ul>
+                    <p class="text-gray-600 mt-3 text-sm">備註:因為台灣目前洗錢防制法實施較嚴，建議找未來公司營運地點附近，且與負責人過去有往來的銀行較容易辦理。</p>
+                </div>
+            </div>
+
+            <!-- Step 3: 匯入資本額 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step3-content', 'step3-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-money-bill-wave text-blue-600 mr-3 text-xl"></i> 3. 匯入資本額 (公司/股東)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step3-arrow"></i>
+                </div>
+                <div id="step3-content" class="accordion-content">
+                    <p class="text-gray-700 mb-3">延伸閱讀：<a href="#" class="text-blue-600 hover:underline">創業過程你需要知道的事情-03-資本額重要嗎?</a> (Placeholder link)</p>
+                    <p class="text-gray-700 mb-3">股款匯入請股東分別匯入或存入，並請銀行於匯款單上，盡量不要代匯。並請股東提供匯款單照片給公司與事務所留存。</p>
+                    <p class="text-gray-700 font-medium mb-1">備註姓名*</p>
+                    <p class="text-gray-700 mb-3">請資金全數到齊後，先提供存摺影本(掃描檔)予事務所，尚未確認可簽證前先務必不要動用。</p>
+                    <p class="text-gray-700 mb-3">資金全數到齊後提供存摺影本，請協助掃描或是拍照完整清晰的封面及封底、存摺攤開第一頁、金額頁。(共三頁) (如下方範例)(如果有不清楚的先與事務所討論）</p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4">
+                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=Cover" alt="存摺封面範例" class="rounded-md shadow-sm">
+                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=Inner+Page" alt="存摺內頁範例" class="rounded-md shadow-sm">
+                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=Amount" alt="金額頁範例" class="rounded-md shadow-sm">
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm">* 如果存摺沒有備註姓名或是有誤，請提供匯款人的存摺封面影本及匯款時的匯款存單。</p>
+                </div>
+            </div>
+
+            <!-- Step 4: 提供餘額證明 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step4-content', 'step4-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-file-invoice-dollar text-blue-600 mr-3 text-xl"></i> 4. 提供餘額證明 (公司提供)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step4-arrow"></i>
+                </div>
+                <div id="step4-content" class="accordion-content">
+                    <ul class="list-disc list-inside ml-4 text-gray-700 space-y-2">
+                        <li>提供資本額到位日隔日之餘額證明。</li>
+                        <li>可隔日轉入任意金額($100)後提供新刷存摺影本(掃描檔)，作為未動用之證明。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 5: 提供登記地址 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step5-content', 'step5-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-map-marker-alt text-blue-600 mr-3 text-xl"></i> 5. 提供登記地址 (公司提供)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step5-arrow"></i>
+                </div>
+                <div id="step5-content" class="accordion-content">
+                    <p class="text-gray-700 mb-3">登記在台北市必須先進行營業場所審查(重要)，事務所請先提供:</p>
+                    <ul class="list-disc list-inside ml-4 text-gray-700 space-y-2">
+                        <li>主要的2-3個營業項目代碼</li>
+                        <li>地址及該地址的建物謄本或所有權狀影本</li>
+                        <li>以新的公司名稱(籌備處)與租用的地點簽租約（或請房東提供建物所有權同意書)。</li>
+                        <li>請房東提供最近年度的房屋稅稅單</li>
+                    </ul>
+                    <p class="text-gray-700 mt-3">取得營業場所預查結果：<a href="http://www.businesslocationinfo.gov.taipei/BLBQS/Home/PrePage" target="_blank" class="text-blue-600 hover:underline">台北市營業場所預查服務</a></p>
+                </div>
+            </div>
+
+            <!-- Step 6: 會議記錄簽名及資本額查核簽證 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step6-content', 'step6-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-handshake text-blue-600 mr-3 text-xl"></i> 6. 會議記錄簽名及資本額查核簽證 (事務所協助)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step6-arrow"></i>
+                </div>
+                <div id="step6-content" class="accordion-content">
+                    <ul class="list-disc list-inside ml-4 text-gray-700 space-y-2">
+                        <li>事務所出具資本額查核簽證報告</li>
+                        <li>事務所協助文件備齊送件(相關會議記錄及文件會協助製作後請您們簽名及用印）</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 7: 登記文件送件 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step7-content', 'step7-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-paper-plane text-blue-600 mr-3 text-xl"></i> 7. 登記文件送件 (事務所協助)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step7-arrow"></i>
+                </div>
+                <div id="step7-content" class="accordion-content">
+                    <ul class="list-disc list-inside ml-4 text-gray-700 space-y-2">
+                        <li>事務所出具資本額查核簽證報告及協助送件</li>
+                        <li>基本上需於股款到位日隔日起算15日內送件。(如果特殊狀況再另行討論)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 8: 辦理稅籍登記 -->
+            <div class="bg-gray-50 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('step8-content', 'step8-arrow')">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-receipt text-blue-600 mr-3 text-xl"></i> 8. 辦理稅籍登記 (負責人)
+                    </h2>
+                    <i class="fas fa-chevron-down accordion-arrow" id="step8-arrow"></i>
+                </div>
+                <div id="step8-content" class="accordion-content">
+                    <p class="text-gray-700">待國稅局發函後，刻立發票章，負責人攜帶大小章及發票章後親自至國稅局簽名。</p>
+                </div>
+            </div>
+
+            <!-- 延伸閱讀 Section -->
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center justify-between cursor-pointer py-2" onclick="toggleAccordion('extension-content', 'extension-arrow')">
+                    <p class="text-lg font-semibold text-blue-800 flex items-center">
+                        <i class="fas fa-book-open text-blue-600 mr-3 text-xl"></i> 延伸閱讀
+                    </p>
+                    <i class="fas fa-chevron-down accordion-arrow" id="extension-arrow"></i>
+                </div>
+                <div id="extension-content" class="accordion-content">
+                    <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
+                        <li><a href="#" class="text-blue-600 hover:underline">公司成立後，還需要做什麼？</a> (Placeholder link)</li>
+                        <li><a href="#" class="text-blue-600 hover:underline">公司地址登記在家裡的影響？</a> (Placeholder link)</li>
+                        <li><a href="#" class="text-blue-600 hover:underline">新設公司 – 勞健保投保規定</a> (Placeholder link)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 聯絡資訊 Section -->
+            <div class="bg-gray-100 p-6 rounded-xl shadow-inner mt-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-address-book text-blue-600 mr-3 text-xl"></i> 聯絡資訊
+                </h2>
+                <p class="text-gray-700">Eric Chiu , CPA</p>
+                <p class="text-gray-700">安得仕聯合會計師事務所</p>
+                <p class="text-gray-700">台北市中山區南京東路172號6樓</p>
+                <p class="text-gray-700">+886-2-2568-2585</p>
+                <p class="text-gray-700">Line ID: newerichiu</p>
+                <p class="text-gray-700">事務所網址：<a href="https://www.atax.tw" target="_blank" class="text-blue-600 hover:underline">https://www.atax.tw</a></p>
+                <p class="text-gray-700">Blog： <a href="https://ericcpa.co/" target="_blank" class="text-blue-600 hover:underline">https://ericcpa.co/</a></p>
+                <p class="text-gray-700">FB： <a href="https://www.facebook.com/eric.cpa.notes" target="_blank" class="text-blue-600 hover:underline">https://www.facebook.com/eric.cpa.notes</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- KYC Modal Structure -->
+    <div id="kycModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0" id="kycModalContent">
+            <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl" onclick="closeKycModal()">
+                &times;
+            </button>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">KYC 表單資訊</h3>
+            <p class="text-gray-700 mb-4">這是一個模擬的 KYC 表單內容。實際應用中，這裡會載入詳細的表單或說明。</p>
+            <p class="text-gray-600 text-sm">請注意：此為示範內容，無實際表單功能。</p>
+            <button class="mt-6 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md" onclick="closeKycModal()">
+                關閉
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Accordion Toggle Function
+        function toggleAccordion(contentId, arrowId) {
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById(arrowId);
+
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                arrow.classList.remove('rotate');
+            } else {
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content.active').forEach(item => {
+                    item.classList.remove('active');
+                    document.getElementById(item.id.replace('-content', '-arrow')).classList.remove('rotate');
+                });
+
+                // Open the clicked accordion
+                content.classList.add('active');
+                arrow.classList.add('rotate');
+            }
+        }
+
+        // Modal Functions
+        function openKycModal(event) {
+            event.preventDefault(); // Prevent default link behavior
+            const modal = document.getElementById('kycModal');
+            const modalContent = document.getElementById('kycModalContent');
+            modal.classList.remove('hidden');
+            // Trigger transition
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10); // Small delay to allow 'hidden' to be removed first
+        }
+
+        function closeKycModal() {
+            const modal = document.getElementById('kycModal');
+            const modalContent = document.getElementById('kycModalContent');
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            // Hide after transition
+            modalContent.addEventListener('transitionend', function handler() {
+                modal.classList.add('hidden');
+                modalContent.removeEventListener('transitionend', handler);
+            });
+        }
+
+        // Automatically open the first accordion on load for better initial visibility
+        document.addEventListener('DOMContentLoaded', (event) => {
+            toggleAccordion('step0-content', 'step0-arrow');
+        });
+    </script>
+</body>
+</html>

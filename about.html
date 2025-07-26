@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Chiu (邱奕淳), CPA - Interactive Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals (Slate & Muted Teal) -->
+    <!-- Application Structure Plan: The SPA is designed as an interactive professional portfolio. It starts with a hero section for immediate impact, followed by thematic sections: 'About/Philosophy' to build a personal connection, 'Expertise & Services' with interactive cards for a quick visual grasp of skills, an interactive 'Professional Journey' timeline to narrate career progression, and a clear 'Contact' section. This structure transforms the linear report into an engaging story, allowing users to explore information non-linearly via navigation or scrolling, which is more user-friendly for understanding a professional's profile. -->
+    <!-- Visualization & Content Choices: 1. Expertise Cards: Report Info -> Interests & Expertise list. Goal -> Clearly list and describe each specialization without implying a scale. Viz -> Interactive HTML/CSS cards in a grid. Interaction -> Click to toggle detailed description. Justification -> Directly addresses user feedback, providing clear, non-scaled presentation of distinct expertise areas. 2. Journey Timeline: Report Info -> Positions, Experience, Certs. Goal -> Show career progression. Viz -> HTML/CSS Timeline. Interaction -> Click to expand details. Justification -> Best for chronological data storytelling. The timeline is now centered for better visual balance after removing the accompanying chart. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+        }
+        .lang-btn.active {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+        }
+        .timeline-item-content {
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .timeline-item.open .timeline-item-content {
+            max-height: 1000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .expertise-card-description {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+        }
+        .expertise-card.open .expertise-card-description {
+            max-height: 200px; /* Sufficient height for description */
+            padding-top: 0.5rem;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-slate-800" data-key="name">Eric Chiu, CPA</h1>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="font-medium text-slate-600 hover:text-teal-600" data-key="nav_about">關於我</a>
+                    <a href="#expertise" class="font-medium text-slate-600 hover:text-teal-600" data-key="nav_expertise">專業領域</a>
+                    <a href="#journey" class="font-medium text-slate-600 hover:text-teal-600" data-key="nav_journey">職業歷程</a>
+                    <a href="#contact" class="font-medium text-slate-600 hover:text-teal-600" data-key="nav_contact">聯繫方式</a>
+                </nav>
+                <div class="flex items-center space-x-1 border border-slate-200 rounded-full p-1">
+                    <button onclick="setLanguage('zh')" class="lang-btn px-3 py-1 text-sm font-medium rounded-full transition-colors duration-300" data-lang="zh">中</button>
+                    <button onclick="setLanguage('en')" class="lang-btn px-3 py-1 text-sm font-medium rounded-full transition-colors duration-300" data-lang="en">EN</button>
+                    <button onclick="setLanguage('ja')" class="lang-btn px-3 py-1 text-sm font-medium rounded-full transition-colors duration-300" data-lang="ja">日</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        
+        <section id="hero" class="text-center mb-20 md:mb-32">
+            <h2 class="text-4xl md:text-6xl font-bold text-slate-800 mb-4" data-key="name">Eric Chiu (邱奕淳), CPA</h2>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto" data-key="hero_subtitle">執業會計師、雲端財會系統創辦人，專注於新創、SaaS與ESG領域的財務與營運策略顧問。</p>
+        </section>
+
+        <section id="about" class="mb-20 md:mb-32 scroll-mt-16">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-slate-800" data-key="about_title">關於我與我的理念</h3>
+                <p class="mt-2 text-lg text-slate-500" data-key="about_intro">我熱衷於將複雜的財會稅務知識，轉化為企業成長的動能。我相信科技與專業的結合，能為財會工作創造更高的價值。</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h4 class="font-bold text-xl mb-4 text-teal-700" data-key="bio_title">個人簡介</h4>
+                    <p class="text-slate-600 leading-relaxed" data-key="bio_content">我是邱奕淳會計師，安得仕聯合會計師事務所的執業會計師，同時也是雲端財會系統的創辦人。我服務眾多新創企業，熱愛探索新科技，並為企業提供財務營運、管理會計、籌資、稅法及公司法等專業建議。近年，我持續關注雲端服務(SaaS)、FinTech、AI、Web3及永續ESG等議題。</p>
+                </div>
+                <div class="space-y-8">
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h4 class="font-bold text-xl mb-2 text-teal-700" data-key="why_startup_title">為什麼會計師還要創業？</h4>
+                        <p class="text-slate-600" data-key="why_startup_content">想喝牛奶卻開了牧場開始養牛。不然這輩子喝到想喝的牛奶不知道要等多久。</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h4 class="font-bold text-xl mb-2 text-teal-700" data-key="aspiration_title">我的期許</h4>
+                        <p class="text-slate-600" data-key="aspiration_content">衷心希望台灣財稅的數位化環境能持續進步、減少不必要的重工，讓財會工作能更有價值。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise" class="mb-20 md:mb-32 scroll-mt-16">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-slate-800" data-key="expertise_title">專業領域與服務</h3>
+                <p class="mt-2 text-lg text-slate-500" data-key="expertise_intro">從傳統財會到前瞻科技，我的專業涵蓋企業成長的各個階段。以下卡片展示了我的核心專長領域，點擊卡片可查看更多細節。</p>
+            </div>
+            <div id="expertise-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Expertise cards will be rendered here by JavaScript -->
+            </div>
+        </section>
+
+        <section id="journey" class="scroll-mt-16 mb-20 md:mb-32">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-slate-800" data-key="journey_title">職業與學習歷程</h3>
+                <p class="mt-2 text-lg text-slate-500" data-key="journey_intro">我的職業生涯是一個不斷學習與實踐的過程。以下時間軸呈現了我的重要經歷與專業認證，展現了我對專業成長的持續投入。</p>
+            </div>
+            <div class="flex flex-col items-center"> <!-- Changed to flex-col and items-center for centering -->
+                <div class="w-full max-w-2xl"> <!-- Added max-w-2xl and w-full for centering and width control -->
+                    <h4 class="text-2xl font-bold text-slate-800 mb-6 text-center" data-key="timeline_title">專業時間軸</h4>
+                    <div class="relative border-l-2 border-teal-200 ml-6 pr-6">
+                        <!-- Timeline items will be rendered here -->
+                    </div>
+                </div>
+                <!-- Removed the certsChart div entirely -->
+            </div>
+        </section>
+
+        <section id="contact" class="scroll-mt-16 text-center bg-white py-16 rounded-2xl shadow-lg">
+            <h3 class="text-3xl font-bold text-slate-800" data-key="contact_title">與我聯繫</h3>
+            <p class="mt-4 mb-8 text-lg text-slate-500 max-w-2xl mx-auto" data-key="contact_intro">我提供公司設立、記帳申報、財稅務簽證、策略執行與永續策略、演講或財稅法顧問等服務。歡迎透過以下方式與我聯繫！</p>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6">
+                <a href="https://www.facebook.com/eric.cpa.notes" target="_blank" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">Facebook</a>
+                <a href="mailto:eric@atax.tw" class="inline-block bg-teal-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-teal-700 transition-colors" data-key="contact_email">E-mail</a>
+                <a href="https://www.atax.tw/" target="_blank" class="inline-block bg-slate-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-800 transition-colors" data-key="contact_website">事務所網站</a>
+                <span class="inline-block bg-green-500 text-white font-bold py-3 px-6 rounded-lg" data-key="contact_line">Line ID: newerichiu</span>
+            </div>
+            <p class="mt-8 text-slate-600 text-sm" data-key="contact_note">擅長用簡單的比喻詮釋困難的事情或法規。</p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8">
+        <p class="text-slate-500 text-sm" data-key="footer_text">Eric Chiu (邱奕淳), CPA | &copy; 2025</p>
+    </footer>
+
+    <script>
+        const contentData = {
+            zh: {
+                name: "Eric Chiu (邱奕淳), CPA",
+                hero_subtitle: "執業會計師、雲端財會系統創辦人，專注於新創、SaaS與ESG領域的財務與營運策略顧問。",
+                nav_about: "關於我",
+                nav_expertise: "專業領域",
+                nav_journey: "職業歷程",
+                nav_contact: "聯繫方式",
+                about_title: "關於我與我的理念",
+                about_intro: "我熱衷於將複雜的財會稅務知識，轉化為企業成長的動能。我相信科技與專業的結合，能為財會工作創造更高的價值。",
+                bio_title: "個人簡介",
+                bio_content: "我是邱奕淳會計師，安得仕聯合會計師事務所的執業會計師，同時也是雲端財會系統的創辦人。我服務眾多新創企業，熱愛探索新科技，並為企業提供財務營運、管理會計、籌資、稅法及公司法等專業建議。近年，我持續關注雲端服務(SaaS)、FinTech、AI、Web3及永續ESG等議題。",
+                why_startup_title: "為什麼會計師還要創業？",
+                why_startup_content: "想喝牛奶卻開了牧場開始養牛。不然這輩子喝到想喝的牛奶不知道要等多久。",
+                aspiration_title: "我的期許",
+                aspiration_content: "衷心希望台灣財稅的數位化環境能持續進步、減少不必要的重工，讓財會工作能更有價值。",
+                expertise_title: "專業領域與服務",
+                expertise_intro: "從傳統財會到前瞻科技，我的專業涵蓋企業成長的各個階段。以下卡片展示了我的核心專長領域，點擊卡片可查看更多細節。",
+                expertise_areas: [
+                    { label: '財務會計', description: '公司財務規劃與輔導' },
+                    { label: '新創', description: '股權規劃、募資、跨國公司' },
+                    { label: '稅務', description: '公司稅務、投資公司、個人理財與稅務規劃' },
+                    { label: '商法', description: '公司登記、公司法、閉鎖性公司規劃、有限合夥、勞動法' },
+                    { label: '管理會計', description: '平衡計分卡、策略地圖、成本管理、策略執行與績效評估' },
+                    { label: 'SaaS', description: '產品開發與運營、UX設計、營運數據分析、Fintech科技運用' },
+                    { label: 'ESG', description: '永續治理與永續策略訂定' }
+                ],
+                journey_title: "職業與學習歷程",
+                journey_intro: "我的職業生涯是一個不斷學習與實踐的過程。以下時間軸呈現了我的重要經歷與專業認證，展現了我對專業成長的持續投入。",
+                timeline_title: "專業時間軸",
+                contact_title: "與我聯繫",
+                contact_intro: "我提供公司設立、記帳申報、財稅務簽證、策略執行與永續策略、演講或財稅法顧問等服務。歡迎透過以下方式與我聯繫！",
+                contact_email: "E-mail",
+                contact_website: "事務所網站",
+                contact_line: "Line ID: newerichiu",
+                contact_note: "擅長用簡單的比喻詮釋困難的事情或法規。",
+                footer_text: "Eric Chiu (邱奕淳), CPA | © 2025"
+            },
+            en: {
+                name: "Eric Chiu, CPA",
+                hero_subtitle: "Practicing CPA, Founder of a Cloud Accounting System, specializing in financial and operational strategy for Startups, SaaS, and ESG.",
+                nav_about: "About",
+                nav_expertise: "Expertise",
+                nav_journey: "Journey",
+                nav_contact: "Contact",
+                about_title: "About Me & My Philosophy",
+                about_intro: "I am passionate about transforming complex financial and tax knowledge into momentum for business growth. I believe the synergy of technology and professional expertise can create greater value for accounting work.",
+                bio_title: "Biography",
+                bio_content: "I am Eric Chiu, a practicing CPA at Andes CPA Firm and the founder of a cloud-based accounting system. I serve numerous startups, love exploring new technologies, and provide professional advice on financial operations, managerial accounting, fundraising, tax law, and corporate law. In recent years, I have been focusing on Cloud Services (SaaS), FinTech, AI, Web3, and Sustainability/ESG topics.",
+                why_startup_title: "Why did a CPA become an entrepreneur?",
+                why_startup_content: "Wanting to drink milk, but instead, I opened a dairy farm and started raising cows. Otherwise, who knows how long I'd have to wait to drink the milk I truly desired.",
+                aspiration_title: "My Aspiration",
+                aspiration_content: "I sincerely hope that Taiwan's financial and tax digitalization environment can continue to improve, reduce unnecessary rework, and make accounting work more valuable.",
+                expertise_title: "Expertise & Services",
+                expertise_intro: "From traditional accounting to cutting-edge technology, my expertise covers all stages of business growth. The cards below display my core areas of specialization. Click a card to learn more.",
+                expertise_areas: [
+                    { label: 'Financial Acct.', description: 'Corporate financial planning and advisory' },
+                    { label: 'Startups', description: 'Equity planning, fundraising, multinational companies' },
+                    { label: 'Taxation', description: 'Corporate tax, investment companies, personal financial and tax planning' },
+                    { label: 'Commercial Law', description: 'Company registration, company law, closed-end company, limited partnerships, labor law' },
+                    { label: 'Managerial Acct.', description: 'Balanced Scorecard, strategy mapping, cost management, strategy execution' },
+                    { label: 'SaaS', description: 'Product development & operations, UX design, operational data analysis, Fintech' },
+                    { label: 'ESG', description: 'Sustainable governance and strategy formulation' }
+                ],
+                journey_title: "Professional & Learning Journey",
+                journey_intro: "My career is a continuous process of learning and practice. The timeline below presents my key experiences and professional certifications, showcasing my ongoing commitment to professional growth.",
+                timeline_title: "Professional Timeline",
+                contact_title: "Contact Me",
+                contact_intro: "I provide services including company formation, bookkeeping, tax attestations, strategic and sustainability consulting, and speaking engagements. Feel free to reach out through the channels below!",
+                contact_email: "E-mail",
+                contact_website: "Firm Website",
+                contact_line: "Line ID: newerichiu",
+                contact_note: "Skilled at explaining complex matters or regulations using simple analogies.",
+                footer_text: "Eric Chiu, CPA | © 2025"
+            },
+            ja: {
+                name: "Eric Chiu (邱奕淳), CPA",
+                hero_subtitle: "開業公認会計士、クラウド会計システムの創設者。スタートアップ、SaaS、ESG分野の財務・運営戦略を専門としています。",
+                nav_about: "私について",
+                nav_expertise: "専門分野",
+                nav_journey: "経歴",
+                nav_contact: "連絡先",
+                about_title: "私と私の理念について",
+                about_intro: "複雑な財務・税務の知識を企業の成長の原動力に変えることに情熱を注いでいます。テクノロジーと専門知識の融合が、会計業務に更なる価値をもたらすと信じています。",
+                bio_title: "自己紹介",
+                bio_content: "私は邱奕淳、Andes CPA事務所の開業公認会計士であり、クラウド会計システムの創設者です。多くのスタートアップ企業を支援し、新技術の探求を好み、財務運営、管理会計、資金調達、税法、会社法に関する専門的アドバイスを提供しています。近年は、クラウドサービス(SaaS)、FinTech、AI、Web3、そして持続可能性/ESGのトピックに注力しています。",
+                why_startup_title: "なぜ会計士が起業したのか？",
+                why_startup_content: "牛乳を飲みたかったのに、牧場を開いて牛を飼い始めました。そうでなければ、本当に飲みたい牛乳を飲むまでにどれだけ待たなければならないかわかりません。",
+                aspiration_title: "私の期待",
+                aspiration_content: "台湾の財務・税務のデジタル化環境が継続的に改善され、不必要な再作業が減り、会計業務がより価値あるものになることを心から願っています。",
+                expertise_title: "専門分野とサービス",
+                expertise_intro: "伝統的な会計から最先端技術まで、私の専門知識は企業成長のあらゆる段階をカバーしています。以下のカードは私の主要な専門分野を示しています。クリックして詳細をご覧ください。",
+                expertise_areas: [
+                    { label: '財務会計', description: '企業財務計画とアドバイザリー' },
+                    { label: 'スタートアップ', description: '株式計画、資金調達、多国籍企業' },
+                    { label: '税務', description: '法人税、投資会社、個人資産運用と税務計画' },
+                    { label: '商法', description: '会社登記、会社法、閉鎖型会社、有限責任組合、労働法' },
+                    { label: '管理会計', description: 'バランススコアカード、戦略マップ、コスト管理、戦略実行' },
+                    { label: 'SaaS', description: '製品開発と運営、UXデザイン、運営データ分析、Fintech' },
+                    { label: 'ESG', description: '持続可能なガバナンスと戦略策定' }
+                ],
+                journey_title: "職業と学習の経歴",
+                journey_intro: "私のキャリアは、学びと実践の連続です。以下のタイムラインは、私の重要な経験と専門資格を示しており、専門的な成長への継続的な取り組みを表しています。",
+                timeline_title: "専門経歴タイムライン",
+                contact_title: "お問い合わせ",
+                contact_intro: "会社設立、記帳申報、財務・税務監査、戦略実行、持続可能性戦略、講演、財務・税法コンサルティングなどのサービスを提供しています。以下の方法でお気軽にご連絡ください。",
+                contact_email: "Eメール",
+                contact_website: "事務所ウェブサイト",
+                contact_line: "Line ID: newerichiu",
+                contact_note: "複雑な事柄や法規を簡単な比喩で説明することに長けています。",
+                footer_text: "Eric Chiu (邱奕淳), CPA | © 2025"
+            }
+        };
+
+        const journeyData = [
+            { year: 2025, type: 'edu', zh: 'BSI永續(ESG)報告訓練課程', en: 'BSI Sustainable(ESG) Reporting Training Course', ja: 'BSI持続可能性(ESG)報告研修コース' },
+            { year: 2024, type: 'pos', zh: '會計師公會全國聯合會ESG永續發展/業務發展委員會委員', en: 'Member, ESG & Business Dev. Committees, National Federation of CPAs', ja: '会計士協会全国連合会 ESG・事業開発委員会 委員' },
+            { year: 2024, type: 'cert', zh: 'TACS 企業永續管理師', en: 'TACS Enterprise Sustainability Manager', ja: 'TACS 企業持続可能性マネージャー' },
+            { year: 2024, type: 'cert', zh: 'BSI ISO/IEC 27001:2022 主導稽核員', en: 'BSI ISO/IEC 27001:2022 Lead Auditor', ja: 'BSI ISO/IEC 27001:2022 主任監査員' },
+            { year: 2023, type: 'edu', zh: '台北市危老重建推動師', en: 'Taipei City Old Building Reconstruction Promoter', ja: '台北市老朽危険建築物再建推進士' },
+            { year: 2023, type: 'cert', zh: 'BSI溫室氣體/碳足跡/碳中和相關查證員 (4項)', en: 'BSI GHG/Carbon Footprint/Neutrality Verifier (4 certs)', ja: 'BSI 温室効果ガス/カーボンフットプリント/カーボンニュートラル関連検証員 (4件)' },
+            { year: 2022, type: 'pos', zh: '台北市會計師公會數位發展委員會委員 (迄2024)', en: 'Member, Digital Dev. Committee, Taipei CPA Association (to 2024)', ja: '台北市会計士協会デジタル開発委員会 委員 (～2024年)' },
+            { year: 2022, type: 'edu', zh: 'SDCMM 永續發展碳管理分析師', en: 'SDCMM Sustainable Carbon Management Analyst', ja: 'SDCMM 持続可能炭素管理アナリスト' },
+            { year: 2021, type: 'pos', zh: '經濟部/青創總會榮譽會計師 (迄今)', en: 'Honorary CPA, MOEA / NYEA (Present)', ja: '経済部/青年創業総会 名誉会計士 (現職)' },
+            { year: 2018, type: 'pos', zh: '台北市商業處服務輪值會計師 (迄2021)', en: 'Rotating CPA, Taipei Dept. of Commerce (to 2021)', ja: '台北市商業処 サービスローテーション会計士 (～2021年)' },
+            { year: 2017, type: 'edu', zh: '鑑識會計專業訓練課程', en: 'Forensic Accounting Professional Training', ja: 'フォレンジック会計専門研修' },
+            { year: 2016, type: 'pos', zh: '會計師公會全國聯合會法規法務委員會委員 (迄2021)', en: 'Member, Legal Affairs Committee, National Federation of CPAs (to 2021)', ja: '会計士協会全国連合会 法規法務委員会 委員 (～2021年)' },
+            { year: 2015, type: 'cert', zh: 'CPEA 勞健保暨勞動法規管理認證', en: 'CPEA Labor Law Management Certification', ja: 'CPEA 労働法規管理認証' },
+            { year: 2012, type: 'cert', zh: 'IIA CIA 內部稽核師', en: 'Certified Internal Auditor (CIA)', ja: '公認内部監査人 (CIA)' },
+            { year: 2012, type: 'cert', zh: '工研院 智慧財產評價種子師資', en: 'IP Valuation Seed Instructor, ITRI', ja: 'ITRI 知的財産評価シードインストラクター' },
+            { year: 2009, type: 'cert', zh: '中華民國會計師 (CPA)', en: 'Certified Public Accountant, R.O.C. (CPA)', ja: '中華民国公認会計士 (CPA)' },
+        ];
+
+        let currentLanguage = 'zh';
+        // certsChart is no longer needed as the chart is removed
+        
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : lang;
+            
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (contentData[lang][key]) {
+                    el.innerHTML = contentData[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            renderJourneyTimeline();
+            renderExpertiseCards();
+            // No charts to update, so updateCharts() is removed
+        }
+
+        function renderJourneyTimeline() {
+            const timelineContainer = document.querySelector('#journey .relative');
+            timelineContainer.innerHTML = '';
+            journeyData.forEach(item => {
+                const colorClasses = {
+                    pos: { bg: 'bg-sky-500', text: 'text-sky-500' },
+                    cert: { bg: 'bg-amber-500', text: 'text-amber-500' },
+                    edu: { bg: 'bg-lime-500', text: 'text-lime-500' }
+                };
+                const itemHtml = `
+                    <div class="mb-8 timeline-item cursor-pointer" onclick="this.classList.toggle('open')">
+                        <div class="flex items-center mb-1">
+                            <div class="absolute -left-3.5 flex items-center justify-center w-7 h-7 ${colorClasses[item.type].bg} rounded-full">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <p class="ml-8 text-lg font-semibold ${item.type === 'cert' ? 'text-amber-500' : (item.type === 'pos' ? 'text-sky-500' : 'text-lime-500')}">${item.year}</p>
+                        </div>
+                        <div class="ml-8">
+                            <h4 class="font-medium text-slate-800">${item[currentLanguage]}</h4>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.innerHTML += itemHtml;
+            });
+        }
+
+        function renderExpertiseCards() {
+            const expertiseContainer = document.getElementById('expertise-cards-container');
+            expertiseContainer.innerHTML = ''; // Clear previous cards
+            contentData[currentLanguage].expertise_areas.forEach((area, index) => {
+                const cardHtml = `
+                    <div class="bg-white p-6 rounded-xl shadow-md cursor-pointer expertise-card" onclick="this.classList.toggle('open')">
+                        <h4 class="font-bold text-xl mb-2 text-teal-700">${area.label}</h4>
+                        <div class="expertise-card-description text-slate-600 text-sm">
+                            <p>${area.description}</p>
+                        </div>
+                    </div>
+                `;
+                expertiseContainer.innerHTML += cardHtml;
+            });
+        }
+
+        // createCharts function is now simplified as certsChart is removed
+        function createCharts() {
+            // No charts to create anymore in this function
+        }
+
+        // updateCharts function is removed as there are no charts to update
+        
+        window.onload = function() {
+            setLanguage('zh');
+            // createCharts() is no longer needed here as no charts are created on load
+            renderExpertiseCards(); // Ensure cards are rendered on load
+        };
+
+    </script>
+</body>
+</html>

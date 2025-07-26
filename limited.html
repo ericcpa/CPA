@@ -8,11 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome CDN for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts for Chinese -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom font for Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
             scroll-behavior: smooth; /* Smooth scrolling for anchor links */
         }
         /* Custom styles for accordion transition */
@@ -80,8 +82,8 @@
                         <li>請提供董事即股東身分證影本(掃描檔)</li>
                         <li>請各股東提供KYC資訊：
                             <ul class="list-circle list-inside ml-4 text-gray-600 space-y-1">
-                                <li><a href="#" class="text-blue-600 hover:underline" onclick="openKycModal(event)">自然人股東KYC表單</a></li>
-                                <li><a href="#" class="text-blue-600 hover:underline" onclick="openKycModal(event)">法人股東KYC表單</a></li>
+                                <li><a href="https://www.laneto.co/kyc.html" target="_blank" class="text-blue-600 hover:underline">自然人股東KYC表單</a></li>
+                                <li><a href="https://www.laneto.co/kyc-le.html" target="_blank" class="text-blue-600 hover:underline">法人股東KYC表單</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -116,15 +118,15 @@
                     <i class="fas fa-chevron-down accordion-arrow" id="step3-arrow"></i>
                 </div>
                 <div id="step3-content" class="accordion-content">
-                    <p class="text-gray-700 mb-3">延伸閱讀：<a href="#" class="text-blue-600 hover:underline">創業過程你需要知道的事情-03-資本額重要嗎?</a> (Placeholder link)</p>
+                    <p class="text-gray-700 mb-3">延伸閱讀：<a href="https://ericcpa.co/before-starting-a-business-03/" target="_blank" class="text-blue-600 hover:underline">創業過程你需要知道的事情-03-資本額重要嗎?</a></p>
                     <p class="text-gray-700 mb-3">股款匯入請股東分別匯入或存入，並請銀行於匯款單上，盡量不要代匯。並請股東提供匯款單照片給公司與事務所留存。</p>
                     <p class="text-gray-700 font-medium mb-1">備註姓名*</p>
                     <p class="text-gray-700 mb-3">請資金全數到齊後，先提供存摺影本(掃描檔)予事務所，尚未確認可簽證前先務必不要動用。</p>
                     <p class="text-gray-700 mb-3">資金全數到齊後提供存摺影本，請協助掃描或是拍照完整清晰的封面及封底、存摺攤開第一頁、金額頁。(共三頁) (如下方範例)(如果有不清楚的先與事務所討論）</p>
                     <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4">
-                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=Cover" alt="存摺封面範例" class="rounded-md shadow-sm">
-                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=Inner+Page" alt="存摺內頁範例" class="rounded-md shadow-sm">
-                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=Amount" alt="金額頁範例" class="rounded-md shadow-sm">
+                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=存摺封面" alt="存摺封面範例" class="rounded-md shadow-sm">
+                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=存摺內頁" alt="存摺內頁範例" class="rounded-md shadow-sm">
+                        <img src="https://placehold.co/200x150/E0E7FF/4338CA?text=金額頁" alt="金額頁範例" class="rounded-md shadow-sm">
                     </div>
                     <p class="text-gray-600 mt-3 text-sm">* 如果存摺沒有備註姓名或是有誤，請提供匯款人的存摺封面影本及匯款時的匯款存單。</p>
                 </div>
@@ -221,9 +223,9 @@
                 </div>
                 <div id="extension-content" class="accordion-content">
                     <ul class="list-disc list-inside ml-4 text-gray-600 space-y-1">
-                        <li><a href="#" class="text-blue-600 hover:underline">公司成立後，還需要做什麼？</a> (Placeholder link)</li>
-                        <li><a href="#" class="text-blue-600 hover:underline">公司地址登記在家裡的影響？</a> (Placeholder link)</li>
-                        <li><a href="#" class="text-blue-600 hover:underline">新設公司 – 勞健保投保規定</a> (Placeholder link)</li>
+                        <li><a href="https://ericcpa.co/after-registration/" target="_blank" class="text-blue-600 hover:underline">公司成立後，還需要做什麼？</a></li>
+                        <li><a href="#" class="text-blue-600 hover:underline">公司地址登記在家裡的影響？</a></li>
+                        <li><a href="https://ericcpa.co/%E6%96%B0%E8%A8%AD%E5%85%AC%E5%8F%B8-%E5%8B%9E%E5%81%A5%E4%BF%9D%E6%8A%95%E4%BF%9D%E8%A6%8F%E5%AE%9A/" target="_blank" class="text-blue-600 hover:underline">新設公司 – 勞健保投保規定</a></li>
                     </ul>
                 </div>
             </div>
@@ -242,22 +244,6 @@
                 <p class="text-gray-700">Blog： <a href="https://ericcpa.co/" target="_blank" class="text-blue-600 hover:underline">https://ericcpa.co/</a></p>
                 <p class="text-gray-700">FB： <a href="https://www.facebook.com/eric.cpa.notes" target="_blank" class="text-blue-600 hover:underline">https://www.facebook.com/eric.cpa.notes</a></p>
             </div>
-        </div>
-    </div>
-
-    <!-- KYC Modal Structure -->
-    <div id="kycModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <!-- Modal Content -->
-        <div class="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative transform transition-all duration-300 scale-95 opacity-0" id="kycModalContent">
-            <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl" onclick="closeKycModal()">
-                &times;
-            </button>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">KYC 表單資訊</h3>
-            <p class="text-gray-700 mb-4">這是一個模擬的 KYC 表單內容。實際應用中，這裡會載入詳細的表單或說明。</p>
-            <p class="text-gray-600 text-sm">請注意：此為示範內容，無實際表單功能。</p>
-            <button class="mt-6 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md" onclick="closeKycModal()">
-                關閉
-            </button>
         </div>
     </div>
 
@@ -281,31 +267,6 @@
                 content.classList.add('active');
                 arrow.classList.add('rotate');
             }
-        }
-
-        // Modal Functions
-        function openKycModal(event) {
-            event.preventDefault(); // Prevent default link behavior
-            const modal = document.getElementById('kycModal');
-            const modalContent = document.getElementById('kycModalContent');
-            modal.classList.remove('hidden');
-            // Trigger transition
-            setTimeout(() => {
-                modalContent.classList.remove('scale-95', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100');
-            }, 10); // Small delay to allow 'hidden' to be removed first
-        }
-
-        function closeKycModal() {
-            const modal = document.getElementById('kycModal');
-            const modalContent = document.getElementById('kycModalContent');
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-95', 'opacity-0');
-            // Hide after transition
-            modalContent.addEventListener('transitionend', function handler() {
-                modal.classList.add('hidden');
-                modalContent.removeEventListener('transitionend', handler);
-            });
         }
 
         // Automatically open the first accordion on load for better initial visibility
